@@ -1,11 +1,9 @@
 import React from "react";
-import { Button, buttonVariants } from "./ui/button";
+import { Button } from "./ui/button";
 import { DatePickerDemo } from "./DatePicker";
 import Link from "next/link";
 
-type Props = {};
-
-const When = (props: Props) => {
+const When = () => {
   return (
     <div className="pl-24 grid gap-y-4">
       <h1 className="py-4 text-4xl font-semibold">CHOOSE WHEN</h1>

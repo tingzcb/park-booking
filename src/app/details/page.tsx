@@ -12,8 +12,9 @@ const details = () => {
       <p className="text-base font-semibold">License Plate</p>
       <p className="text-base font-semibold">State</p>
       <p className="font-light">
-        Please carefully check your vehicle's license plate details are correct.
-        An in correct license plate could result in your access being denied.
+        Please carefully check your vehicle&apos;s license plate details are
+        correct. An in correct license plate could result in your access being
+        denied.
       </p>
       <p className="text-base font-semibold">Access</p>
       <p className="font-light">
@@ -27,7 +28,7 @@ const details = () => {
       <p className="font-light">
         Your QR code(s) can be found on the email confirmation, please ensure
         you have your QR code ready at both the entry and exist if your lisence
-        plate doesn't open the boom gates.
+        plate doesn&apos;t open the boom gates.
       </p>
       <CheckboxDemo></CheckboxDemo>
       <AlertDialogDemo></AlertDialogDemo>

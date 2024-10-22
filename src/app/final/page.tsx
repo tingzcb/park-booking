@@ -10,7 +10,7 @@ const final = () => {
         </div>
         <div className="flex justify-center">
           {" "}
-          <p className="text-base font-semibold">You're booked in!</p>
+          <p className="text-base font-semibold">You&apos;re booked in!</p>
         </div>
         <div className="flex justify-center">
           {" "}

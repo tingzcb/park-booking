@@ -24,15 +24,12 @@ export function AlertDialogDemo() {
           <AlertDialogDescription className="flex">
             <ScrollArea className="w-full h-80 rounded-md border p-4">
               Jokester began sneaking into the castle in the middle of the night
-              and leaving jokes all over the place: under the king's pillow, in
-              his soup, even in the royal toilet. The king was furious, but he
-              couldn't seem to stop Jokester. And then, one day, the people of
-              the kingdom discovered that the jokes left by Jokester were so
-              funny that they couldn't help but laugh. And once they started
-              laughing, they couldn't stop. This action cannot be undone. This
-              will permanently delete your account and remove your data from our
-              servers.This action cannot be undone. This will permanently delete
-              your account and remove your data from our servers.This action
+              and leaving jokes all over the place: under the king&apos;s
+              pillow, in his soup, even in the royal toilet. The king was
+              furious, but he couldn&apos;t seem to stop Jokester. And then, one
+              day, the people of the kingdom discovered that the jokes left by
+              Jokester were so funny that they couldn&apos;t help but laugh. And
+              once they started laughing, they couldn&apos;t stop. This action
               cannot be undone. This will permanently delete your account and
               remove your data from our servers.This action cannot be undone.
               This will permanently delete your account and remove your data
@@ -52,7 +49,10 @@ export function AlertDialogDemo() {
               This will permanently delete your account and remove your data
               from our servers.This action cannot be undone. This will
               permanently delete your account and remove your data from our
-              servers.
+              servers.This action cannot be undone. This will permanently delete
+              your account and remove your data from our servers.This action
+              cannot be undone. This will permanently delete your account and
+              remove your data from our servers.
             </ScrollArea>
           </AlertDialogDescription>
         </AlertDialogHeader>
