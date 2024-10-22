@@ -4,9 +4,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import React from "react";
 
-type Props = {};
-
-const details = (props: Props) => {
+const details = () => {
   return (
     <div className="pl-24 grid gap-y-4">
       <h1 className="py-4 text-3xl font-semibold">DETAILS</h1>
