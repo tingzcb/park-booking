@@ -26,6 +26,9 @@ const When = () => {
         </div>
         <div className="min-w-56  max-w-3xl px-4 md:w-[calc(100vw-24rem)] md:self-center ">
           <MapProvider>
+            <p className="text-2xl font-semibold pt-3 text-orange-600">
+              528 Kent Street
+            </p>
             <MapComponent />
           </MapProvider>
         </div>
