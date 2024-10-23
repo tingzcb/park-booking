@@ -6,7 +6,7 @@ import React from "react";
 
 const details = () => {
   return (
-    <div className="pl-24 grid gap-y-4">
+    <div className="mx-3 grid gap-y-4">
       <h1 className="py-4 text-3xl font-semibold">DETAILS</h1>
       <p className="text-2xl font-semibold">Vehicle Details</p>
       <p className="text-base font-semibold">License Plate</p>
