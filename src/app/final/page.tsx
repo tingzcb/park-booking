@@ -1,5 +1,6 @@
 import React from "react";
 import TaskAltRoundedIcon from "@mui/icons-material/TaskAltRounded";
+import QRCode from "react-qr-code";
 
 const final = () => {
   return (
@@ -17,6 +18,13 @@ const final = () => {
           <p className="font-light">
             An email confirming your permit has been sent to your email.
           </p>
+        </div>
+        <div className="flex justify-center pt-4">
+          <QRCode
+            size={256}
+            value="145465465767"
+            viewBox={`0 0 256 256`}
+          ></QRCode>
         </div>
       </div>
     </>
