@@ -1,5 +1,5 @@
 "use client";
-import { signIn, useSession } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 export default function SignIn() {
   const { data, status } = useSession();
@@ -11,6 +11,8 @@ export default function SignIn() {
         <div onClick={() => signIn("google")}>Sign in with Google</div>
         <div>Sign in with Github</div>
         <div>Sign in with Facebook</div>
+
+        <div onClick={() => signOut()}>Sign out with Google</div>
       </div>
     </div>
   );
