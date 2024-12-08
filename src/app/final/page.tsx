@@ -60,7 +60,7 @@ const final = () => {
               <div className="flex justify-center py-4 ">
                 <QRCode
                   size={256}
-                  value="145465465767"
+                  value="i love u"
                   viewBox={`0 0 256 256`}
                 ></QRCode>
               </div>
