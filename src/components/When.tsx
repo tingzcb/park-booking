@@ -1,11 +1,67 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import { Button } from "./ui/button";
 import { DatePickerDemo } from "./DatePicker";
 import Link from "next/link";
 import { MapProvider } from "@/utils/map-provider";
 import { MapComponent } from "@/utils/map";
+import { isBefore, isSameDay } from "date-fns";
 
 const When = () => {
+  const [startDate, setStartDate] = useState<Date | undefined>();
+  const [endDate, setEndDate] = useState<Date | undefined>();
+
+  // 禁用过去的日期
+  const disablePastDates = (date: Date) => {
+    const today = new Date();
+    return isBefore(date, today) && !isSameDay(date, today);
+  };
+
+  // 禁用 End Date 小于或等于 Start Date
+  const disableInvalidEndDates = (date: Date): boolean => {
+    const today = new Date(); // 获取当前日期
+    if (!startDate) {
+      // 如果没有选定 Start Date，只禁用小于今天的日期
+      return isBefore(date, today) && !isSameDay(date, today);
+    }
+    // 禁用日期小于今天或小于 Start Date
+    return (
+      (isBefore(date, today) && !isSameDay(date, today)) ||
+      isBefore(date, startDate)
+    );
+  };
+  const isNextButtonEnabled =
+    startDate &&
+    endDate &&
+    (isBefore(startDate, endDate) || isSameDay(startDate, endDate));
+
+  const handleSave = () => {
+    console.log("Start Date:", startDate);
+    console.log("End Date:", endDate);
+
+    // 模拟保存到后端
+    const data = {
+      startDate,
+      endDate
+    };
+
+    fetch("/api/save-dates", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+      .then((response) => {
+        if (response.ok) {
+          console.log("Dates saved successfully");
+        } else {
+          console.error("Failed to save dates");
+        }
+      })
+      .catch((error) => console.error("Error saving dates:", error));
+  };
+
   return (
     <>
       <div className="md:flex justify-center  ">
@@ -18,9 +74,17 @@ const When = () => {
           <p className="text-base font-semibold">Cost</p>
           <p className="font-light">$0.00</p>
           <p className="text-base font-semibold">Start Date</p>
-          <DatePickerDemo></DatePickerDemo>
+          <DatePickerDemo
+            date={startDate}
+            setDate={setStartDate}
+            disabledDates={disablePastDates}
+          ></DatePickerDemo>
           <p className="text-base font-semibold">End Date</p>
-          <DatePickerDemo></DatePickerDemo>
+          <DatePickerDemo
+            date={endDate}
+            setDate={setEndDate}
+            disabledDates={disableInvalidEndDates}
+          ></DatePickerDemo>
           <p className="text-base font-semibold">Amount</p>
           <p className="text-base font-semibold">$0.00</p>
         </div>
@@ -43,10 +107,11 @@ const When = () => {
         </Button>
 
         <Button
+          onClick={handleSave}
           className="bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-full px-4 py-2 "
           asChild
         >
-          <Link href="/details">NEXT</Link>
+          <Link href={isNextButtonEnabled ? "/details" : "#"}>NEXT</Link>
         </Button>
       </div>
     </>
