@@ -1,12 +1,23 @@
 "use client";
 
+import { useState } from "react";
 import { Checkbox } from "./ui/checkbox";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 
-export function CheckboxDemo() {
+interface CheckboxDemoProps {
+  onCheckedChange: (isChecked: boolean) => void; // 回调函数，用于将状态传递到父组件
+}
+
+export function CheckboxDemo({ onCheckedChange }: CheckboxDemoProps) {
+  const handleCheckboxChange = (e: any) => {
+    onCheckedChange(e.target.checked); // 调用父组件传入的回调，传递复选框的状态
+  };
   return (
     <div className="flex items-center space-x-2">
-      <Checkbox id="terms" />
+      <Checkbox
+        id="terms"
+        onChange={handleCheckboxChange} // 触发回调
+      />
       <label
         htmlFor="terms"
         className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
@@ -17,18 +28,17 @@ export function CheckboxDemo() {
             Terms and Conditions.
           </PopoverTrigger>
           <PopoverContent>
-            First Parking TERMS OF USE This website it operated by First Parking
-            Pty Ltd ACN 638 038 712. Any reference to ‘we’, ‘us’ or ‘our’ is a
-            reference to First Parking Pty Ltd ACN 638 038 712. ACCEPTANCE AND
-            AMENDMENTS OF THESE TERMS OF USE We provide this website subject to
-            these terms of use and by using this website, you are agreeing to be
-            bound by these terms of use. If you do not accept these terms of
-            use, you must refrain from using this website. We may change these
-            terms of use at any time. Any amendments will take effect
-            immediately upon notification on this website. APPLICATION OF THESE
-            TERMS OF USE These terms of use apply to your use of this website,
-            including any facilities and services accessible through it,
-            including access to and use of our Express Parking membership.
+            Parking TERMS OF USE This website it operated by ----- Any reference
+            to ‘we’, ‘us’ or ‘our’ is a reference to Parking Pty Ltd ACN ----.
+            ACCEPTANCE AND AMENDMENTS OF THESE TERMS OF USE We provide this
+            website subject to these terms of use and by using this website, you
+            are agreeing to be bound by these terms of use. If you do not accept
+            these terms of use, you must refrain from using this website. We may
+            change these terms of use at any time. Any amendments will take
+            effect immediately upon notification on this website. APPLICATION OF
+            THESE TERMS OF USE These terms of use apply to your use of this
+            website, including any facilities and services accessible through
+            it, including access to and use of our Express Parking membership.
             ACCESS You must ensure that your access to this website is not
             illegal or prohibited by laws. Your access to this website may be
             terminated at any time by us without notice to you. USE OF YOUR
@@ -43,7 +53,7 @@ export function CheckboxDemo() {
             material or providing your information to third parties who may send
             you marketing material We will collect and use your personal
             information in accordance with our Privacy Policy located here
-            www.firstparking.com.au/privacy-policy/
+            -------
           </PopoverContent>
         </Popover>
       </label>

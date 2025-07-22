@@ -6,10 +6,15 @@ import Link from "next/link";
 import { MapProvider } from "@/utils/map-provider";
 import { MapComponent } from "@/utils/map";
 import { isBefore, isSameDay } from "date-fns";
+import { useStepState } from "@/store";
 
 const When = () => {
   const [startDate, setStartDate] = useState<Date | undefined>();
   const [endDate, setEndDate] = useState<Date | undefined>();
+  const [startDateError, setStartDateError] = useState<string | null>(null);
+  const [endDateError, setEndDateError] = useState<string | null>(null);
+
+  const { nextStep, prevStep } = useStepState();
 
   // 禁用过去的日期
   const disablePastDates = (date: Date) => {
@@ -35,9 +40,38 @@ const When = () => {
     endDate &&
     (isBefore(startDate, endDate) || isSameDay(startDate, endDate));
 
+  const validateDates = () => {
+    const today = new Date();
+    let hasError = false;
+
+    if (!startDate) {
+      setStartDateError("Start date is required.");
+      hasError = true;
+    } else if (isBefore(startDate, today)) {
+      setStartDateError("Start date must be today or later.");
+      hasError = true;
+    } else {
+      setStartDateError(null);
+    }
+
+    if (!endDate) {
+      setEndDateError("End date is required.");
+      hasError = true;
+    } else if (startDate && isBefore(endDate, startDate)) {
+      setEndDateError("End date must be after or the same as start date.");
+      hasError = true;
+    } else {
+      setEndDateError(null);
+    }
+
+    return !hasError;
+  };
+
   const handleSave = () => {
-    console.log("Start Date:", startDate);
-    console.log("End Date:", endDate);
+    if (validateDates()) {
+      console.log("Start Date:", startDate);
+      console.log("End Date:", endDate);
+    }
 
     // 模拟保存到后端
     const data = {
@@ -55,6 +89,7 @@ const When = () => {
       .then((response) => {
         if (response.ok) {
           console.log("Dates saved successfully");
+          nextStep();
         } else {
           console.error("Failed to save dates");
         }
@@ -72,19 +107,27 @@ const When = () => {
           <p className="text-base font-semibold">Product</p>
           <p className="font-light">Share with Oscar</p>
           <p className="text-base font-semibold">Cost</p>
-          <p className="font-light">$0.00</p>
+          <p className="font-light">$10.00</p>
           <p className="text-base font-semibold">Start Date</p>
           <DatePickerDemo
             date={startDate}
             setDate={setStartDate}
             disabledDates={disablePastDates}
           ></DatePickerDemo>
+
+          {startDateError && (
+            <p className="text-red-600 text-sm mt-1">{startDateError}</p>
+          )}
           <p className="text-base font-semibold">End Date</p>
           <DatePickerDemo
             date={endDate}
             setDate={setEndDate}
             disabledDates={disableInvalidEndDates}
           ></DatePickerDemo>
+          {endDateError && (
+            <p className="text-red-600 text-sm mt-1">{endDateError}</p>
+          )}
+
           <p className="text-base font-semibold">Amount</p>
           <p className="text-base font-semibold">$0.00</p>
         </div>

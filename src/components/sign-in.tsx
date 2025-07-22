@@ -9,8 +9,6 @@ export default function SignIn() {
     <div>
       <div>
         <div onClick={() => signIn("google")}>Sign in with Google</div>
-        <div>Sign in with Github</div>
-        <div>Sign in with Facebook</div>
 
         <div onClick={() => signOut()}>Sign out with Google</div>
       </div>
